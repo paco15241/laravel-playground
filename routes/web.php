@@ -32,3 +32,12 @@ Route::get('/register', function() {
 Route::get('/admin', function() {
     return view('admin');
 });
+
+// some examples
+Route::get('/loader-example', function() {
+    return view('loader-example');
+});
+
+Route::get('/form-example', function() {
+    return view('form-example');
+});

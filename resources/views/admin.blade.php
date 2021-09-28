@@ -122,27 +122,38 @@
 
 
     <div x-data="alpineInit()" x-init="init()" class="flex flex-col mt-8 max-w-7xl mx-auto">
-        <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <button class="inline-flex items-center justify-center w-10 h-10 mr-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                <path d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" fill-rule="evenodd"></path>
+            </svg>
+        </button>
+
+        <div class="mt-2 py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="min-w-full inline-block overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                 <table class="w-full">
                     <thead>
                         <tr>
                             <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                #</th>
+                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                 Title</th>
                             <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
                                 Description</th>
                             <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                Status</th>
+                                状态</th>
                             <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                Edit</th>
-                            <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
-                                Delete</th>
+                                操作</th>
                         </tr>
                     </thead>
 
                     <tbody class="bg-white">
                         <template x-for="post in posts" :key="post.id">
                             <tr>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div x-text="post.id" class="text-sm leading-5 text-gray-500">
+                                        <!-- id -->
+                                    </div>
+                                </td>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 w-10 h-10">
@@ -157,30 +168,22 @@
                                     </div>
                                 </td>
 
-                                <td x-text="post.description" class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    <div class="text-sm leading-5 text-gray-500">
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    <div x-text="post.description" class="text-sm leading-5 text-gray-500">
                                         <!-- description -->
                                     </div>
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                                    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span>
+                                    <!-- <span class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">Active</span> -->
+                                    <span class="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full">Inactive</span>
                                 </td>
 
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
-                                </td>
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
-                                    <svg 
-                                        xmlns="http://www.w3.org/2000/svg" 
-                                        class="w-6 h-6 text-red-400 cursor-pointer" 
-                                        fill="none" 
-                                        viewBox="0 0 24 24" 
-                                        stroke="currentColor"
-                                        @click.prevent="deleteData(post.id)"
-                                    >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-red-400 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" @click.prevent="deleteData(post.id)">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                     </svg>
                                 </td>
@@ -188,9 +191,97 @@
                         </template>
                     </tbody>
                 </table>
-
-                
             </div>
+            
+            <!-- pagination -->
+            <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                <div class="flex-1 flex justify-between sm:hidden">
+                    <span x-bind:class="{'cursor-not-allowed': prevUrl == null || firstUrl == currentUrl}">
+                        <a
+                            x-bind:class="{'pointer-events-none': prevUrl == null || firstUrl == currentUrl}"
+                            @click.prevent="indexData(prevUrl)"
+                            x-bind:disabled="prevUrl == null || firstUrl == currentUrl"
+                            class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                        >
+                            上一頁
+                        </a>
+                    </span>
+
+                    <span x-bind:class="{'cursor-not-allowed': nextUrl == null || lastUrl == currentUrl}">
+                        <a 
+                            x-bind:class="{'pointer-events-none': nextUrl == null || lastUrl == currentUrl}"
+                            @click.prevent="indexData(nextUrl)"
+                            x-bind:disabled="nextUrl == null || lastUrl == currentUrl"
+                            class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                        >
+                            下一頁
+                        </a>
+                    </span>
+                </div>
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm text-gray-700">
+                            Showing
+                            <span class="font-medium" x-text="firstItem"></span>
+                            to
+                            <span class="font-medium" x-text="lastItem"></span>
+                            of
+                            <span class="font-medium" x-text="total"></span>
+                            results
+                        </p>
+                    </div>
+                    <div>
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">上一頁</span>
+                                <!-- Heroicon name: solid/chevron-left -->
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            
+                            
+
+                            <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+                            <a href="#" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                1
+                            </a>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                2
+                            </a>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium">
+                                3
+                            </a>
+                            <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
+                                ...
+                            </span>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 hidden md:inline-flex relative items-center px-4 py-2 border text-sm font-medium">
+                                8
+                            </a>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                9
+                            </a>
+                            <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                10
+                            </a>
+
+
+
+                            <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">下一頁</span>
+                                <!-- Heroicon name: solid/chevron-right -->
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+
+
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -198,14 +289,21 @@
         function alpineInit() {
             return {
                 posts: [],
+                isLoading: false,
+                currentUrl: null,
+                firstUrl: "/api/posts?page=1",
+                nextUrl: null,
+                prevUrl: null,
+                lastUrl: null,
+                total: null,
+                perPage: 12,
+                currentPage: 1,
+                visiblePages: 4,
+                
+                
                 loggedIn: false,
                 user: {},
-                get authToken() {
-                    return localStorage.getItem('authToken');
-                },
-                get isAdmin() {
-                    return this.user.permission === 'admin';
-                },
+
                 init() {
                     if (this.authToken !== null) {
                         fetch('api/user', {
@@ -236,12 +334,19 @@
                                     location.href = "/";
                                 }
 
-                                this.loadData();
+                                this.indexData();
                             });
                     } else {
                         alert('你没有权限');
                         location.href = "/";
                     }
+                },
+
+                get authToken() {
+                    return localStorage.getItem('authToken');
+                },
+                get isAdmin() {
+                    return this.user.permission === 'admin';
                 },
                 logout() {
                     fetch('api/user/logout', {
@@ -259,8 +364,10 @@
                             this.loggedIn = false;
                         });
                 },
-                loadData() {
-                    fetch('/api/posts', {
+                indexData(url=this.firstUrl) {
+                    currentUrl = url
+
+                    fetch(currentUrl, {
                             method: 'GET',
                             headers: {
                                 'Accept': 'application/json',
@@ -269,15 +376,69 @@
                         })
                         .then((response) => response.json())
                         .then((data) => {
-                            this.posts = data;
+                            this.isLoading = false;
+                            this.perPage = data.per_page;
+                            this.total = data.total;
+                            this.firstUrl = data.first_page_url;
+                            this.prevUrl = data.prev_page_url;
+                            this.nextUrl = data.next_page_url;
+                            this.lastUrl = data.last_page_url;
+                            this.posts = data.data;
                         });
+                },
+                showData(id) {
+                    // TODO
                 },
                 deleteData(id) {
                     if (confirm("你確定要刪除該筆資料？")) {
                         console.log(id);
                         // TODO
                     }
-                }
+                },
+                editData(id) {
+                    // TODO
+                },
+                createData() {
+                    // TODO
+                },
+
+                // pagination-related methods
+                get totalPages() {
+                    return Math.ceil(this.total / this.perPage);
+                },
+                get startPage() {
+                    if (this.currentPage == 1) {
+                        return 1;
+                    }
+                    if (this.currentPage == this.totalPages) {
+                        return (this.totalPages - this.visiblePages + 1 <= 0) ? 1 : this.totalPages - this.visiblePages + 1 ;
+                    }
+                    return this.currentPage - 1;
+                },
+                get endPage() {
+                    return Math.min(this.startPage + this.visiblePages - 1, this.totalPages);
+                },
+                get pages() {
+                    const range = [];
+                    for (let i = this.startPage; i <= this.endPage; i += 1) {
+                        range.push({
+                            name: i,
+                            isActive: i == this.currentPage,
+                            url: `/api/products?page=${i}`,
+                        });
+                    }
+                    return range;
+                },
+                get firstItem() {
+                    return this.perPage * this.currentPage - this.perPage + 1;
+                },
+                get lastItem() {
+                    let lastItem = this.perPage * this.currentPage;
+                    if (lastItem > this.total) {
+                        return this.total;
+                    }
+                    return this.perPage * this.currentPage;
+                },
             }
         }
     </script>
